@@ -27,8 +27,7 @@ export const AuthProvider:FC = ({ children }) => {
     const router = useRouter();
 
     useEffect(() => {
-      if (status === 'authenticated') {
-        console.log(data?.user);
+      if (status === 'authenticated') {        
         //TODO: tenemos que hacer el dispatch pero la data no viene como yo estoy esperando
         dispatch({ type: '[Auth] - Login', payload: data?.user as IUser});
       }
