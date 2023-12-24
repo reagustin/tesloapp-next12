@@ -6,8 +6,18 @@ import { SWRConfig } from 'swr';
 
 import { lightTheme } from '../themes';
 import { AuthProvider, CartProvider, UiProvider } from '../context';
+import { useEffect, useState } from 'react';
 
 function MyApp({ Component, pageProps }: AppProps) {
+
+  /* const [showChild, setShowChild] = useState(false);
+    useEffect(() => {
+        setShowChild(true);
+    }, []);
+    if (!showChild) {
+        return <></>;
+  } */
+
   return (
     <SessionProvider>
       <SWRConfig 
