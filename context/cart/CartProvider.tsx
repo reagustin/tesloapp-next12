@@ -1,4 +1,4 @@
-import { FC, useEffect, useReducer } from 'react';
+import { FC, useEffect, useReducer, useRef } from 'react';
 import Cookie from 'js-cookie';
 
 import { ICartProduct, IOrder, ShippingAddress } from '../../interfaces';
@@ -33,6 +33,7 @@ const CART_INITIAL_STATE: CartState = {
 export const CartProvider:FC = ({ children }) => {
 
     const [state, dispatch] = useReducer( cartReducer , CART_INITIAL_STATE );
+    const isReloading = useRef( true );
     
     useEffect(() => {
         try {
@@ -60,13 +61,21 @@ export const CartProvider:FC = ({ children }) => {
     }, [])
     
     
-    useEffect(() => {
+    /* useEffect(() => {
         // if(state.cart.length === 0) return; // OTRA ALTERNATIVA DE LO DE ABAJO
         // if(state.cart.length > 0) { // TODO se quito el if xq entra en conflicto con la limpieza dle order complete
             Cookie.set('cart', JSON.stringify( state.cart ));
         // }  // TODO tuve que sacar esta validacion, que solucionaba el hidration issue de react, 
         // TODO el hidration se resolvio quintar el strict mode en next.config.js
-    }, [state.cart]);
+    }, [state.cart]); */
+
+    useEffect( () => {
+        if ( isReloading.current ) {    
+            isReloading.current = false;    
+        } else {    
+            Cookie.set( 'cart', JSON.stringify( state.cart ) );    
+        }    
+    }, [ state.cart ] );
 
 
     useEffect(() => {
