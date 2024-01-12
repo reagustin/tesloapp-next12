@@ -83,7 +83,9 @@ const payOrder = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
 
     dbOrder.transactionId = transactionId;
     dbOrder.isPaid = true;
-    dbOrder.save();
+    console.log('LLEGO HASTA ACA')
+    const resp = await dbOrder.save();
+    console.log('RESP DB SAVE', resp);
 
     await db.disconnect();
 

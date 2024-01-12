@@ -1,4 +1,5 @@
-import NextAuth from "next-auth"
+import NextAuth from 'next-auth';
+import type { NextAuthOptions } from 'next-auth';
 import GithubProvider from 'next-auth/providers/github';
 import Credentials from "next-auth/providers/credentials";
 import { dbUsers } from "../../../database";
@@ -13,7 +14,7 @@ declare module "next-auth" {
     }
 };  
 
-export default NextAuth({    
+export const authOptions: NextAuthOptions = ({    
     providers: [  
         
 
@@ -81,3 +82,5 @@ export default NextAuth({
         }
     }
 });
+
+export default NextAuth(authOptions)

@@ -11,7 +11,9 @@ import { validations } from '../../utils';
 // import { tesloApi } from '../../api';
 import { useRouter } from 'next/router';
 import { getSession, signIn, getProviders } from 'next-auth/react';
+import getServerSession from 'next-auth/next';
 
+import { authOptions } from '../api/auth/[...nextauth]';
 
 type FormData = {
     email   : string,
@@ -149,12 +151,16 @@ const LoginPage = () => {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({req, query}) => {
-    const session = await getSession({req})
+export const getServerSideProps: GetServerSideProps = async ({req, res, query}) => {
+    const session = await getSession({req}) // en DEV
+    // const session = await getServerSession( authOptions );
 
+    console.log('SESION', session);
+    
     const { p = '/'} = query;
 
     if(session){
+        console.log('USer', session.user);
         return {
             redirect: {
                 destination: p.toString(),
