@@ -5,7 +5,7 @@ import { getSession } from 'next-auth/react';
 import { PayPalButtons } from "@paypal/react-paypal-js";
 import { Box, Card, CardContent, Divider, Grid, Typography, Chip, CircularProgress } from '@mui/material';
 import { CreditCardOffOutlined, CreditScoreOutlined } from '@mui/icons-material';
-import { tesloApi } from '../../api';
+import { tesloApi } from '../../fetching';
 import { dbOrders } from '../../database';
 import { ShopLayout } from '../../components/layouts/ShopLayout';
 import { CartList, OrderSummary } from '../../components/cart';
